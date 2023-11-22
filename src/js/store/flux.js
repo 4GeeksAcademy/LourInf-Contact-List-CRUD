@@ -47,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getContacts: async () => {
 					//because I define my baseURL in the store, now I need to access baseURL from the store by using "getStore().baseURL" before constructing the API endpoint URL
 				const store = getStore();
-				const url = store.baseURL + "/agenda";
+				const url = store.baseURL + "/agenda/shared_agenda";
 				const options = {
 					method: "GET"
 					
