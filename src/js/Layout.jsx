@@ -4,6 +4,8 @@ import ScrollToTop from "./component/scrollToTop";
 //Import views
 import { Home } from "./views/Home.jsx";
 import { Demo } from "./views/demo";
+import { Contact } from "./views/Contact.jsx";
+import { AddContact } from "./views/AddContact.jsx";
 import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 //Import components
@@ -24,6 +26,8 @@ const Layout = () => {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/demo" element={<Demo />} />
+						<Route path="/contact" element={<Contact />} />
+						<Route path="/add" element={<AddContact />} />
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>

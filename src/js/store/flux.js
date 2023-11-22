@@ -12,8 +12,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			baseURL: "https://playground.4geeks.com/apis/fake/contact/",
+			isLogin: false,
+			contactList: [],
+			selectedContact: {},
 		},
+		
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
@@ -37,7 +42,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+			//I add fetch as part of the object
+			getContacts: async () => {
+					//because I define my baseURL in the store, now I need to access baseURL from the store by using "getStore().baseURL" before constructing the API endpoint URL
+				const store = getStore();
+				const url = store.baseURL + "/agenda";
+				const options = {
+					method: "GET"
+					
+				}
+				const response = await fetch (url, options);
+				console.log(response);
+				if (response.ok) {
+					const data = await response.json();
+					setStore({ "contactList": data}) 
+					console.log(data)
+
+				} else
+					console.log("Error:", response.status, response.statusText)
+		
+				
+			  },
+
 		}
 	};
 };
