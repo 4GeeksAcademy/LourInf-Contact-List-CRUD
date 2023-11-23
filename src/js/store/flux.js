@@ -61,10 +61,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				} else
 					console.log("Error:", response.status, response.statusText)
-		
 				
 			  },
 
+			  deleteContact: async (item) => {			
+				const store = getStore();
+				const url = `${store.baseURL}/agenda/${item.id}`;
+				const options = {
+					method: "DELETE",
+				};
+				const response = await fetch(url, options);
+				console.log(response);
+				if (response.ok) {
+					const data = await response.json();
+					setStore({ "contactList": "" });
+					console.log(data);
+				} else {
+					console.log("Error:", response.status, response.statusText);
+				}
+			},
 		}
 	};
 };
