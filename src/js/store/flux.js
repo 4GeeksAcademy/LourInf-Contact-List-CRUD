@@ -43,15 +43,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			//I add fetch as part of the object
+			//we add fetch as part of the object
 			getContacts: async () => {
-					//because I define my baseURL in the store, now I need to access baseURL from the store by using "getStore().baseURL" before constructing the API endpoint URL
+					//because we define the baseURL in the store, now I need to access baseURL from the store by using "getStore().baseURL" before constructing the API endpoint URL
 				const store = getStore();
 				const url = store.baseURL + "/agenda/shared_agenda";
 				const options = {
-					method: "GET"
-					
-				}
+					method: "GET",
+					headers:{
+						
+					}
+				};
 				const response = await fetch (url, options);
 				console.log(response);
 				if (response.ok) {

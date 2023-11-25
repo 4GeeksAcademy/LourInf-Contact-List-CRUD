@@ -6,6 +6,7 @@ import { Home } from "./views/Home.jsx";
 import { Demo } from "./views/demo";
 import { Contact } from "./views/Contact.jsx";
 import { AddContact } from "./views/AddContact.jsx";
+import { EditContact } from "./views/EditContact.jsx";
 import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 //Import components
@@ -28,6 +29,7 @@ const Layout = () => {
 						<Route path="/demo" element={<Demo />} />
 						<Route path="/contact" element={<Contact />} />
 						<Route path="/add" element={<AddContact />} />
+						<Route path="/edit" element={<EditContact />} />
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>

@@ -1,10 +1,10 @@
 import React from "react";
 
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
+	<footer className="footer mt-auto py-3 text-center fixed-bottom">
+		<p className="text-secondary">
 			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com" target="_blank">4Geeks Academy</a>
+			<a href="https://github.com/LourInf" target="_blank" className="text-decoration-none text-secondary">Lourdes Infante</a>
 		</p>
 	</footer>
 );

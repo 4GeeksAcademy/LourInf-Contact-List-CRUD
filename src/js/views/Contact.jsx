@@ -2,7 +2,7 @@ import React, { useContext } from "react"; //1. import useContext
 import { Context } from "../store/appContext.js"; //2. import useContext from appContext.js
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons'
-
+import { Link } from "react-router-dom";
 
 
 export const Contact = () => {
@@ -14,19 +14,13 @@ export const Contact = () => {
         event.target.src = "https://img.freepik.com/free-photo/user-front-side-with-white-background_187299-40007.jpg?w=740&t=st=1700666482~exp=1700667082~hmac=a0cf24972e737bfad23258f77ed21fc8798dd4f0ce93f2f19253281da1dff8ad"
     }
     
-  
-    const handleEdit = () => {
-        console.log('Edit button clicked');
-        // To be written
-    }
-
     const handleDelete = async (item) => {
         actions.deleteContact(item);
     };
     
         return (
             <div>
-                <h1 className="text-center mb-3">Contacts</h1>
+                <h1 className="text-center m-3">Contacts</h1>
                 <div>
                     {store.contactList.length > 0 ? (
                         store.contactList.map((item, index) => (
@@ -37,22 +31,25 @@ export const Contact = () => {
                                     </div>
                                     <div className="col-md-8">
                                         <div className="card-body">
-                                            <h5 className="card-title">{item.full_name}</h5>
-                                            <p className="card-text">{item.address}</p>
-                                            <p className="card-text">{item.phone}</p>
-                                            <p className="card-text">{item.email}</p>
+                                            <h5 className="card-title ">{item.full_name}</h5>
+                                            <p> <span className="text-info fw-bold"> Address: </span> {item.address}</p> 
+                                            <p> <span className="text-info fw-bold"> Phone: </span>${item.phone} </p>
+                                            <p> <span className="text-info fw-bold"> Email: </span> ${item.email} </p>
                                         </div>
                                     </div>
-                                    <div className="col-md-2">
-                                        <span><FontAwesomeIcon icon={faPencil} className="me-5" onClick={handleEdit} /></span>
-                                        <span><FontAwesomeIcon icon={faTrash} onClick={() => handleDelete(item)} /></span>
+                                    <div className="col-md-2 d-flex">
+                                        <Link to="/edit"><span><FontAwesomeIcon icon={faPencil} className="me-3 btn btn-outline-secondary"/></span></Link>
+                                        <span><FontAwesomeIcon icon={faTrash} className="btn btn-outline-danger" onClick={() => handleDelete(item)} /></span>
                                     </div>
                                 </div>
                             </div>
                         ))
                     ) : (
-                        <p>No contacts available</p>
+                        <p className="text-info fs-3">No contacts available</p>
                     )}
+                </div>
+                <div className="d-flex justify-content-center">
+                <Link to="/add" className="d-flex btn btn-outline-info" > Add Contact </Link>
                 </div>
             </div>
         );
