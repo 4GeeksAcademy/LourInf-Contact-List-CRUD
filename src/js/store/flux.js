@@ -1,48 +1,19 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
 			baseURL: "https://playground.4geeks.com/apis/fake/contact/",
-			isLogin: false,
 			contactList: [],
 			selectedContact: {},
 		},
 		
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			/*Notes on Syntax inside actions: 
+					getActions() ==> use it to call another action (function) inside actions (function)
+					const store = getStore(); ==> use it to access to some value inside store
+					setStore({ key: value }); ==> use it to reset the global store value (graba los datos en el store). key: what we want to change; value: new value we want to give it
+			*/
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
 
-				//reset the global store
-				setStore({ demo: demo });
-			},
 			//we add fetch as part of the object
 			getContacts: async () => {
 					//because we define the baseURL in the store, now I need to access baseURL from the store by using "getStore().baseURL" before constructing the API endpoint URL
