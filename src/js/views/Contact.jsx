@@ -18,6 +18,7 @@ export const Contact = () => {
         actions.deleteContact(id);
     };
     
+    
      return (
             <div>
                 <h1 className="text-center m-3">Contacts</h1>
@@ -39,7 +40,7 @@ export const Contact = () => {
                                     </div>
                                     <div className="col-md-2 d-flex">
                                     <Link to={`/contact/${item.id}`}><span><FontAwesomeIcon icon={faEye} className="me-3 btn btn-outline-warning"/></span></Link>
-                                        <Link to="/edit"><span><FontAwesomeIcon icon={faPencil} className="me-3 btn btn-outline-secondary"/></span></Link>
+                                        <Link to={`/edit/${item.id}`}><span><FontAwesomeIcon icon={faPencil} className="me-3 btn btn-outline-secondary"/></span></Link>
                                         <span><FontAwesomeIcon icon={faTrash} className="btn btn-outline-danger" onClick={() => handleDelete(item.id)}/></span>
                                     </div>
                                 </div>

@@ -80,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteContact: async (id) => {			
 				const store = getStore();
-				const url = `${store.baseURL}/agenda/${contactId}`;
+				const url = `${store.baseURL}/agenda/${id}`;
 				const options = {
 					method: "DELETE",
 				};
@@ -89,6 +89,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					const data = await response.json();
 					getActions.getContacts();   //I need to get back my list of contacts which now won't include the one deleted
+					console.log(data);
+				} else {
+					console.log("Error:", response.status, response.statusText);
+				}
+			},
+
+			updateContact: async (contactId, updatedContact) => {			
+				const store = getStore();
+				const url = `${store.baseURL}/agenda/${contactId}`;
+				const options = {
+					method: "PUT",
+					headers: {
+						"Content-type": "application/json"},
+					body: JSON.stringify(updatedContact)
+				};
+				const response = await fetch(url, options);
+				console.log(response);
+				if (response.ok) {
+					const data = await response.json();
+					getActions.getContacts();   //I need to get back my list of contacts with now the updated contact
 					console.log(data);
 				} else {
 					console.log("Error:", response.status, response.statusText);
