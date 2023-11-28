@@ -28,7 +28,7 @@ export const AddContact = () => {
         navigate("/contact");  //C. Use navigate to go back to contact list
     }
 
-    const handleCancel = () => {  //to clear form fields by resetting state values
+    const handleReset = () => {  //to clear form fields by resetting state values
         setName("");
         setAddress("");
         setPhone("");
@@ -58,7 +58,7 @@ export const AddContact = () => {
                         <input type="email" required className="form-control" id="InputEmail" aria-describedby="emailHelp" value={email} onChange ={(event) =>setEmail (event.target.value)} />
                     </div>
                     <button type="submit" className="btn btn-info me-3">Submit</button>
-                    <button type="reset" className="btn btn-dark" onClick={handleCancel}>Cancel</button>
+                    <button type="reset" className="btn btn-dark" onClick={handleReset}>Reset</button>
                     <div className="d-flex justify-content-center m-2 mb-5">
                     <Link className="btn btn-outline-info" to="/contact">Go back to contacts</Link>
                     </div>

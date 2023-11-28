@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			baseURL: "https://playground.4geeks.com/apis/fake/contact/",
+			baseURL: "https://playground.4geeks.com/apis/fake/contact",
 			contactList: [],
 			selectedContact: {},
 		},
@@ -28,7 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(response);
 				if (response.ok) {
 					const data = await response.json();
-					setStore({ "contactList": data}) 
+					setStore({ contactList: data}) 
 					console.log(data)
 
 				} else
@@ -36,20 +36,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				
 			  },
 
-			getSingleContact: async (contactId) => {
-				const store = getStore();
-				const url = `${store.baseURL}/agenda/${contactId}`;  //we can also write it like this: store.baseURL + "/agenda/" + id;
+			getSingleContact: async (id) => {
+				//const store = getStore();
+				//const url = `${store.baseURL}/${id}`;  //we can also write it like this: store.baseURL + "/agenda/" + id;
+				const url= "https://playground.4geeks.com/apis/fake/contact/" + id;
+				console.log(url);
 				const options = {
-					method: "GET",
-					headers:{	
-					}
+					method: "GET"
 				};
-				const response = await fetch (url, options);
+				const response = await fetch(url, options);
 				console.log(response);
 				if (response.ok) {
 					const data = await response.json();
-					setStore({ "selectedContact": data}) 
-					console.log(data)
+					
+					setStore({selectedContact: data,});
 
 				} else
 					console.log("Error:", response.status, response.statusText)
