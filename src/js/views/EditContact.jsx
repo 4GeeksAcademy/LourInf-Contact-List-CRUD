@@ -17,22 +17,22 @@ export const EditContact = () => {
     //When creating a new contact, no existing data fetching is required; the form starts with empty values. 
     //Now, for editing, we need useEffect to fetch contact details to populate the form for modification.
     
-    /*useEffect(()=>{
+    useEffect(() => {
         async function fetchData() {
-            if (params.contactId) {
-            const response = await actions.getSingleContact(params.contactId);
-           
-            const selectedContact = store.selectedContact;
-            console.log(selectedContact); 
-            setName(selectedContact.full_name);
-            setAddress(selectedContact.address);
-            setPhone(selectedContact.phone);
-            setEmail(selectedContact.email);
-            }}
-            fetchData();
-        }, [params.contactId, store.selectedContact])
+            if (params.contactId && !store.selectedContact.id) {
+                // Check if contact details are not already present
+                const response = await actions.getSingleContact(params.contactId);
+                const selectedContact = store.selectedContact;
+                console.log(selectedContact);
+                setName(selectedContact.full_name);
+                setAddress(selectedContact.address);
+                setPhone(selectedContact.phone);
+                setEmail(selectedContact.email);
+            }
+        }
+        fetchData();
+    }, [params.contactId, store.selectedContact]);
 
-        */
 
     const handleOnSubmit = async (event) => {
         event.preventDefault();
@@ -43,8 +43,11 @@ export const EditContact = () => {
             email, 
             agenda_slug: "shared_agenda"
         };
-        actions.updateContact(updatedContact);
-        navigate("/contact"); // C. navigate to go back to contact list
+
+        const contactId = params.contactId; // FIXED- we need to get the contactId from params. Without this ID, the action wouldn't know which contact to update, and the server wouldn't know which record in the database to modify!
+        actions.updateContact(contactId, updatedContact); // FIXED - and pass contactId to updateContact
+        navigate("/contact"); // navigate to go back to contact list
+
     };
 
     const handleCancel = () => {

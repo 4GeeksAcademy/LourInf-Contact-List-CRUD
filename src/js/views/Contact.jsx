@@ -14,7 +14,7 @@ export const Contact = () => {
         event.target.src = "https://img.freepik.com/free-photo/user-front-side-with-white-background_187299-40007.jpg?w=740&t=st=1700666482~exp=1700667082~hmac=a0cf24972e737bfad23258f77ed21fc8798dd4f0ce93f2f19253281da1dff8ad"
     }
     
-    const handleDelete = async (id) => {
+    const handleDelete = (id) => {
         actions.deleteContact(id);
     };
     
