@@ -8,7 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		
 		actions: {
 			/*Notes on Syntax inside actions: 
-					getActions() ==> use it to call another action (function) inside actions (function)
+					getActions() ==> use it to call another action (function) inside actions (function). For example: getActions().getContacts();
 					const store = getStore(); ==> use it to access to some value inside store
 					setStore({ key: value }); ==> use it to reset the global store value (graba los datos en el store). key: what we want to change; value: new value we want to give it
 			*/
@@ -37,9 +37,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			  },
 
 			getSingleContact: async (id) => {
-				//const store = getStore();
-				//const url = `${store.baseURL}/${id}`;  //we can also write it like this: store.baseURL + "/agenda/" + id;
-				const url= "https://playground.4geeks.com/apis/fake/contact/" + id;
+				const store = getStore();
+				const url = `${store.baseURL}/${id}`;  //we can also write it like this: store.baseURL + id;
 				console.log(url);
 				const options = {
 					method: "GET"
@@ -49,7 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					const data = await response.json();
 					
-					setStore({selectedContact: data,});
+					setStore({selectedContact: data});
 
 				} else
 					console.log("Error:", response.status, response.statusText)
@@ -80,7 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteContact: async (id) => {			
 				const store = getStore();
-				const url = `${store.baseURL}/agenda/${id}`;
+				const url = `${store.baseURL}/${id}`;
 				const options = {
 					method: "DELETE",
 				};
@@ -88,7 +87,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(response);
 				if (response.ok) {
 					const data = await response.json();
-					getActions.getContacts();   //I need to get back my list of contacts which now won't include the one deleted
+					getActions().getContacts();   //I need to get back my list of contacts which now won't include the one deleted
 					console.log(data);
 				} else {
 					console.log("Error:", response.status, response.statusText);
@@ -97,7 +96,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			updateContact: async (contactId, updatedContact) => {			
 				const store = getStore();
-				const url = `${store.baseURL}/agenda/${contactId}`;
+				const url = `${store.baseURL}/${contactId}`;
 				const options = {
 					method: "PUT",
 					headers: {
@@ -108,7 +107,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(response);
 				if (response.ok) {
 					const data = await response.json();
-					getActions.getContacts();   //I need to get back my list of contacts with now the updated contact
+					getActions().getContacts();   //I need to get back my list of contacts with now the updated contact
 					console.log(data);
 				} else {
 					console.log("Error:", response.status, response.statusText);
@@ -119,3 +118,4 @@ const getState = ({ getStore, getActions, setStore }) => {
 };
 
 export default getState;
+

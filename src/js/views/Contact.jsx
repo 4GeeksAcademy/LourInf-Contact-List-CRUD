@@ -18,7 +18,6 @@ export const Contact = () => {
         actions.deleteContact(id);
     };
     
-    
      return (
             <div>
                 <h1 className="text-center m-3">Contacts</h1>
@@ -47,7 +46,7 @@ export const Contact = () => {
                             </div>
                         ))
                     ) : (
-                        <p className="text-info fs-3">No contacts available</p>
+                        <p className="text-secondary fs-4 text-center m-5"><em>No contacts available</em></p>
                     )}
                 </div>
                 <div className="d-flex justify-content-center">

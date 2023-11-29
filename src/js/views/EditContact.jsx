@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"; //1. import useContext
+import React, { useContext, useState, useEffect } from "react"; //1. import useContext
 import { Context } from "../store/appContext.js"; //2. import useContext from appContext.js
 import { Link, useNavigate, useParams } from "react-router-dom"; // A. Import useNavigate
 
@@ -17,16 +17,22 @@ export const EditContact = () => {
     //When creating a new contact, no existing data fetching is required; the form starts with empty values. 
     //Now, for editing, we need useEffect to fetch contact details to populate the form for modification.
     
-    /*
-    useEffect(async () => {
-        actions.getSingleContact(params.id);
-        const selectedContact = store.selectedContact;
-        setName(selectedContact.full_name);
-        setAddress(selectedContact.address);
-        setPhone(selectedContact.phone);
-        setEmail(selectedContact.email);
-        },
-        [params.id, store.selectedContact]);
+    /*useEffect(()=>{
+        async function fetchData() {
+            if (params.contactId) {
+            const response = await actions.getSingleContact(params.contactId);
+           
+            const selectedContact = store.selectedContact;
+            console.log(selectedContact); 
+            setName(selectedContact.full_name);
+            setAddress(selectedContact.address);
+            setPhone(selectedContact.phone);
+            setEmail(selectedContact.email);
+            }}
+            fetchData();
+        }, [params.contactId, store.selectedContact])
+
+        */
 
     const handleOnSubmit = async (event) => {
         event.preventDefault();
@@ -37,21 +43,20 @@ export const EditContact = () => {
             email, 
             agenda_slug: "shared_agenda"
         };
-        actions.updateContact(params.id,updatedContact);
+        actions.updateContact(updatedContact);
         navigate("/contact"); // C. navigate to go back to contact list
     };
 
     const handleCancel = () => {
         navigate("/contact"); 
     };
-    */
+    
 
     return (
         <div>
             <h1 className="text-center mt-3">Edit contact </h1>
 
-           {/* <form onSubmit={handleOnSubmit}> */}  {/* <<<<----------- TO UNCOMMENT WHEN FIXED */}
-           <form>
+         <form onSubmit={handleOnSubmit}>
                 <div className="container">
                     <div className="mb-3">
                         <label htmlFor="InputName" className="form-label fw-bold">Name:</label>
@@ -70,7 +75,7 @@ export const EditContact = () => {
                         <input type="email" required className="form-control" id="InputEmail" aria-describedby="emailHelp" value={email} onChange ={(event) =>setEmail (event.target.value)} />
                     </div>
                     <button type="submit" className="btn btn-info me-3">Update</button>
-        {/* <button type="button" className="btn btn-dark" onClick={handleCancel}>Cancel</button> */}   {/* <<<<----------- TO UNCOMMENT WHEN FIXED */}
+                    <button type="button" className="btn btn-dark" onClick={handleCancel}>Cancel</button> 
                     <div className="d-flex justify-content-center m-2 mb-5">
                     <Link className="btn btn-outline-info" to="/contact">Go back to contacts</Link>
                     </div>
