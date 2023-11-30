@@ -27,7 +27,7 @@ export const ViewContact = () =>{
         <div className="container">
         <h1 className="text-center mt-3" >Contact details</h1> 
             <div className="card m-auto mt-5 d-flex flex-row bg-light text-dark">
-            <img src={urlImg} onError={handleError} className="card-img border border-light" style={{ width: "25rem" }} alt="contact image" />
+            <img src={urlImg} onError={handleError} className="card-img border border-light img-fluid" style={{ width: "25rem" }} alt="contact image" />
                     <div className="card-body d-flex flex-column">
                         {!store.selectedContact ? 
                             <Spinner />

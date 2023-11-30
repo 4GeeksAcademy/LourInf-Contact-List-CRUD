@@ -19,36 +19,42 @@ export const Contact = () => {
     };
     
      return (
-            <div>
+            <div className="container">
                 <h1 className="text-center m-3">Contacts</h1>
-                <div>
                     {store.contactList.length > 0 ? (
                         store.contactList.map((item, id) => (
-                            <div className="card container-fluid mb-3" style={{ width: "70rem" }} key={id}>
-                                <div className="row g-0 align-items-center">
-                                    <div className="col-md-2">
-                                        <img src={urlImg} onError={handleError} className="card-img rounded-circle" alt="profile picture" />
+                            
+                            
+                            <div className="card container mb-3 d-flex flex-row align-items-center" style={{ width: "70rem" }} key={id}>
+                                  <div className="container m-3" style={{ width: "12rem" }}>
+                                        <img src={urlImg} onError={handleError} className="card-img rounded-circle img-fluid" alt="profile picture"  />
                                     </div>
-                                    <div className="col-md-8">
-                                        <div className="card-body">
+                                    
+                                   
+                                        <div className="card-body m-3">
                                             <h5 className="card-title ">{item.full_name}</h5>
                                             <p> <span className="text-info fw-bold"> Address: </span> {item.address}</p> 
                                             <p> <span className="text-info fw-bold"> Phone: </span>{item.phone} </p>
                                             <p> <span className="text-info fw-bold"> Email: </span> {item.email} </p>
                                         </div>
-                                    </div>
-                                    <div className="col-md-2 d-flex">
+                                    
+                                    <div className="m-3">
                                     <Link to={`/contact/${item.id}`}><span><FontAwesomeIcon icon={faEye} className="me-3 btn btn-outline-warning"/></span></Link>
                                         <Link to={`/edit/${item.id}`}><span><FontAwesomeIcon icon={faPencil} className="me-3 btn btn-outline-secondary"/></span></Link>
                                         <span><FontAwesomeIcon icon={faTrash} className="btn btn-outline-danger" onClick={() => handleDelete(item.id)}/></span>
                                     </div>
-                                </div>
+                                
                             </div>
                         ))
                     ) : (
                         <p className="text-secondary fs-4 text-center m-5"><em>No contacts available</em></p>
                     )}
-                </div>
+             
+               
+               
+               
+               
+               
                 <div className="d-flex justify-content-center">
                 <Link to="/add" className="d-flex btn btn-outline-info mb-5 fw-bold btn-lg" > Add Contact </Link>
                 </div>
